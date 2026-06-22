@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data Wisatawan Neon</title>
+<title>Data Wisatawan</title>
 
 <style>
 
@@ -13,97 +13,75 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    font-family:'Segoe UI',sans-serif;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:30px;
+
     background:
-    radial-gradient(circle at top left,#00ffff30,transparent 40%),
-    radial-gradient(circle at bottom right,#ff00ff30,transparent 40%),
-    linear-gradient(135deg,#050816,#091329,#000);
-    overflow:hidden;
-}
+    radial-gradient(circle at top left,#ff000055,transparent 40%),
+    radial-gradient(circle at bottom right,#ff222255,transparent 40%),
+    linear-gradient(135deg,#120000,#220000,#000000);
 
-/* Efek cahaya background */
-body::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#00ffff;
-    filter:blur(200px);
-    opacity:.15;
-    top:-150px;
-    left:-150px;
-}
-
-body::after{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#ff00ff;
-    filter:blur(200px);
-    opacity:.15;
-    bottom:-150px;
-    right:-150px;
+    color:white;
 }
 
 .container{
     width:100%;
-    max-width:700px;
-    padding:20px;
-    z-index:10;
+    max-width:900px;
 }
 
 .card{
-    backdrop-filter:blur(20px);
     background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(15px);
     border-radius:25px;
     padding:35px;
+
     box-shadow:
-        0 0 20px rgba(0,255,255,.3),
-        0 0 40px rgba(0,255,255,.2),
-        0 0 80px rgba(255,0,255,.2);
+    0 0 20px rgba(255,0,0,.8),
+    0 0 50px rgba(255,0,0,.6),
+    0 0 120px rgba(255,0,0,.5);
 }
 
 h2{
     text-align:center;
-    color:white;
     margin-bottom:30px;
-    font-size:32px;
     letter-spacing:3px;
-    text-transform:uppercase;
+
     text-shadow:
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 40px #00ffff;
+    0 0 10px #ff0000,
+    0 0 20px #ff0000,
+    0 0 40px #ff0000,
+    0 0 80px #ff0000;
 }
 
 .form-group{
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 label{
     display:block;
     margin-bottom:8px;
-    color:#00ffff;
+    color:#ff4444;
     font-weight:bold;
-    letter-spacing:1px;
-    text-shadow:0 0 10px #00ffff;
+
+    text-shadow:
+    0 0 10px #ff0000;
 }
 
 input{
     width:100%;
-    padding:14px 16px;
+    padding:14px;
     border-radius:12px;
-    border:2px solid rgba(0,255,255,.3);
+    border:2px solid rgba(255,0,0,.5);
+
     background:rgba(255,255,255,.05);
+
     color:white;
     font-size:15px;
     outline:none;
@@ -111,67 +89,122 @@ input{
 }
 
 input::placeholder{
-    color:#bbb;
+    color:#ccc;
 }
 
 input:focus{
-    border-color:#00ffff;
+    border-color:#ff0000;
+
     box-shadow:
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        inset 0 0 10px rgba(0,255,255,.2);
+    0 0 15px #ff0000,
+    0 0 30px #ff0000,
+    0 0 60px #ff0000;
 }
 
 button{
     width:100%;
-    border:none;
     padding:15px;
+    border:none;
     border-radius:12px;
+
     color:white;
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
+
     background:linear-gradient(
         45deg,
-        #00ffff,
-        #00aaff,
-        #ff00ff
+        #ff0000,
+        #ff3333,
+        #ff6666
     );
+
     background-size:300% 300%;
-    animation:gradientMove 5s ease infinite;
+
+    animation:neon 4s infinite;
+
     box-shadow:
-        0 0 15px #00ffff,
-        0 0 30px #00ffff,
-        0 0 60px #ff00ff;
+    0 0 20px #ff0000,
+    0 0 40px #ff0000,
+    0 0 80px #ff0000,
+    0 0 150px #ff0000;
+
     transition:.3s;
 }
 
 button:hover{
-    transform:translateY(-3px) scale(1.02);
+    transform:scale(1.03);
+
     box-shadow:
-        0 0 20px #00ffff,
-        0 0 40px #00ffff,
-        0 0 80px #ff00ff;
+    0 0 30px #ff0000,
+    0 0 60px #ff0000,
+    0 0 120px #ff0000,
+    0 0 200px #ff0000;
 }
 
 #pesan{
-    margin-top:20px;
+    margin-top:15px;
     text-align:center;
     font-weight:bold;
-    font-size:16px;
-    text-shadow:0 0 10px currentColor;
 }
 
-@keyframes gradientMove{
+.judul-data{
+    margin-top:35px;
+    margin-bottom:15px;
+    text-align:center;
+
+    text-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #ff0000;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+
+    box-shadow:
+    0 0 20px #ff0000;
+}
+
+thead{
+    background:#ff0000;
+}
+
+thead th{
+    padding:15px;
+    color:white;
+}
+
+tbody tr{
+    background:rgba(255,0,0,.08);
+    transition:.3s;
+}
+
+tbody tr:hover{
+    background:rgba(255,0,0,.25);
+}
+
+tbody td{
+    padding:14px;
+    border-bottom:1px solid rgba(255,0,0,.3);
+}
+
+@keyframes neon{
+
     0%{
         background-position:0% 50%;
     }
+
     50%{
         background-position:100% 50%;
     }
+
     100%{
         background-position:0% 50%;
     }
+
 }
 
 </style>
@@ -183,7 +216,7 @@ button:hover{
 
 <div class="card">
 
-<h2>DATA WISATAWAN</h2>
+<h2>🔥 DATA WISATAWAN 🔥</h2>
 
 <form id="formWisatawan">
 
@@ -222,6 +255,26 @@ required>
 
 <div id="pesan"></div>
 
+<h3 class="judul-data">
+📋 DATA TERSIMPAN
+</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Nama Wisatawan</th>
+<th>Tempat Lahir</th>
+</tr>
+</thead>
+
+<tbody id="dataBody">
+
+</tbody>
+
+</table>
+
 </div>
 
 </div>
@@ -234,66 +287,132 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
     getFirestore,
     doc,
-    setDoc
+    setDoc,
+    collection,
+    onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
+
     apiKey: "YOUR_API_KEY",
+
     authDomain: "amrulloh-8542c.firebaseapp.com",
+
     projectId: "amrulloh-8542c",
-    storageBucket: "amrulloh-8542c.firebasestorage.app",
-    messagingSenderId: "231647011110",
-    appId: "1:231647011110:web:7fb18a2e84499a5796e1e7"
+
+    storageBucket:
+    "amrulloh-8542c.firebasestorage.app",
+
+    messagingSenderId:
+    "231647011110",
+
+    appId:
+    "1:231647011110:web:7fb18a2e84499a5796e1e7"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
 
-const form = document.getElementById("formWisatawan");
-const pesan = document.getElementById("pesan");
+const form =
+document.getElementById("formWisatawan");
 
-form.addEventListener("submit", async (e)=>{
+const pesan =
+document.getElementById("pesan");
+
+const dataBody =
+document.getElementById("dataBody");
+
+form.addEventListener(
+"submit",
+async (e)=>{
 
     e.preventDefault();
 
     const id_wisatawan =
-        document.getElementById("id_wisatawan").value.trim();
+    document.getElementById(
+    "id_wisatawan").value.trim();
 
     const nama_wisatawan =
-        document.getElementById("nama_wisatawan").value.trim();
+    document.getElementById(
+    "nama_wisatawan").value.trim();
 
     const tempat_lahir =
-        document.getElementById("tempat_lahir").value.trim();
+    document.getElementById(
+    "tempat_lahir").value.trim();
 
     try{
 
         await setDoc(
-            doc(db,"wisatawan",id_wisatawan),
+
+            doc(
+                db,
+                "wisatawan",
+                id_wisatawan
+            ),
+
             {
                 id_wisatawan,
                 nama_wisatawan,
                 tempat_lahir,
-                created_at:new Date().toISOString()
+                created_at:
+                new Date()
+                .toISOString()
             }
+
         );
 
-        pesan.style.color="#00ff88";
-        pesan.innerHTML="✅ Data wisatawan berhasil disimpan";
+        pesan.style.color =
+        "#00ff66";
+
+        pesan.innerHTML =
+        "✅ Data berhasil disimpan";
 
         form.reset();
 
-    }catch(error){
+    }
 
-        console.error(error);
+    catch(error){
 
-        pesan.style.color="#ff4444";
-        pesan.innerHTML=
-        "❌ Gagal menyimpan data : " +
-        error.message;
+        pesan.style.color =
+        "#ff4444";
+
+        pesan.innerHTML =
+        "❌ " + error.message;
+
     }
 
 });
+
+onSnapshot(
+
+    collection(db,"wisatawan"),
+
+    (snapshot)=>{
+
+        dataBody.innerHTML="";
+
+        snapshot.forEach((doc)=>{
+
+            const data =
+            doc.data();
+
+            dataBody.innerHTML += `
+
+            <tr>
+                <td>${data.id_wisatawan}</td>
+                <td>${data.nama_wisatawan}</td>
+                <td>${data.tempat_lahir}</td>
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+);
 
 </script>
 
