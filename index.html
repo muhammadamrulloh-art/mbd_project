@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Data Wisatawan</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    h2{
+        text-align:center;
+        color:#333;
+    }
+
+    .form-group{
+        margin-bottom:15px;
+    }
+
+    label{
+        display:block;
+        margin-bottom:5px;
+        font-weight:bold;
+    }
+
+    input{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:4px;
+        box-sizing:border-box;
+    }
+
+    button{
+        background:#2196F3;
+        color:white;
+        border:none;
+        padding:10px 20px;
+        border-radius:4px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:#1976D2;
+    }
+
+    #pesan{
+        margin-top:15px;
+        font-weight:bold;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Form Data Wisatawan</h2>
+
+<form id="formWisatawan">
+
+    <div class="form-group">
+        <label for="id_wisatawan">ID Wisatawan</label>
+        <input type="text" id="id_wisatawan" placeholder="Contoh: W00001" required>
+    </div>
+
+    <div class="form-group">
+        <label for="nama_wisatawan">Nama Wisatawan</label>
+        <input type="text" id="nama_wisatawan" placeholder="Masukkan Nama Wisatawan" required>
+    </div>
+
+    <div class="form-group">
+        <label for="tempat_lahir">Tempat Lahir</label>
+        <input type="text" id="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
+    </div>
+
+    <button type="submit">Simpan</button>
+
+</form>
+
+<div id="pesan"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA3QTWS5FXX7_gL1I49JiqWgenLl3Jj7v8",
+    authDomain: "amrulloh-8542c.firebaseapp.com",
+    projectId: "amrulloh-8542c",
+    storageBucket: "amrulloh-8542c.firebasestorage.app",
+    messagingSenderId: "231647011110",
+    appId: "1:231647011110:web:7fb18a2e84499a5796e1e7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form = document.getElementById("formWisatawan");
+const pesan = document.getElementById("pesan");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const id_wisatawan =
+        document.getElementById("id_wisatawan").value.trim();
+
+    const nama_wisatawan =
+        document.getElementById("nama_wisatawan").value.trim();
+
+    const tempat_lahir =
+        document.getElementById("tempat_lahir").value.trim();
+
+    try {
+
+        await setDoc(
+            doc(db, "wisatawan", id_wisatawan),
+            {
+                id_wisatawan: id_wisatawan,
+                nama_wisatawan: nama_wisatawan,
+                tempat_lahir: tempat_lahir,
+                created_at: new Date().toISOString()
+            }
+        );
+
+        pesan.style.color = "green";
+        pesan.innerHTML = "✓ Data wisatawan berhasil disimpan";
+
+        form.reset();
+
+    } catch (error) {
+
+        console.error(error);
+
+        pesan.style.color = "red";
+        pesan.innerHTML =
+            "✗ Gagal menyimpan data : " + error.message;
+    }
+
+});
+
+</script>
+
+</body>
+</html>
