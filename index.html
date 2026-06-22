@@ -1,101 +1,245 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Form Data Wisatawan</title>
+
+<title>Data Wisatawan Neon</title>
 
 <style>
-    body{
-        font-family: Arial, sans-serif;
-        max-width: 700px;
-        margin: 30px auto;
-        padding: 20px;
-    }
 
-    h2{
-        text-align:center;
-        color:#333;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    .form-group{
-        margin-bottom:15px;
-    }
+body{
+    font-family:'Segoe UI',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    radial-gradient(circle at top left,#00ffff30,transparent 40%),
+    radial-gradient(circle at bottom right,#ff00ff30,transparent 40%),
+    linear-gradient(135deg,#050816,#091329,#000);
+    overflow:hidden;
+}
 
-    label{
-        display:block;
-        margin-bottom:5px;
-        font-weight:bold;
-    }
+/* Efek cahaya background */
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#00ffff;
+    filter:blur(200px);
+    opacity:.15;
+    top:-150px;
+    left:-150px;
+}
 
-    input{
-        width:100%;
-        padding:10px;
-        border:1px solid #ccc;
-        border-radius:4px;
-        box-sizing:border-box;
-    }
+body::after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#ff00ff;
+    filter:blur(200px);
+    opacity:.15;
+    bottom:-150px;
+    right:-150px;
+}
 
-    button{
-        background:#2196F3;
-        color:white;
-        border:none;
-        padding:10px 20px;
-        border-radius:4px;
-        cursor:pointer;
-    }
+.container{
+    width:100%;
+    max-width:700px;
+    padding:20px;
+    z-index:10;
+}
 
-    button:hover{
-        background:#1976D2;
-    }
+.card{
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:
+        0 0 20px rgba(0,255,255,.3),
+        0 0 40px rgba(0,255,255,.2),
+        0 0 80px rgba(255,0,255,.2);
+}
 
-    #pesan{
-        margin-top:15px;
-        font-weight:bold;
+h2{
+    text-align:center;
+    color:white;
+    margin-bottom:30px;
+    font-size:32px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    color:#00ffff;
+    font-weight:bold;
+    letter-spacing:1px;
+    text-shadow:0 0 10px #00ffff;
+}
+
+input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:2px solid rgba(0,255,255,.3);
+    background:rgba(255,255,255,.05);
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+input::placeholder{
+    color:#bbb;
+}
+
+input:focus{
+    border-color:#00ffff;
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        inset 0 0 10px rgba(0,255,255,.2);
+}
+
+button{
+    width:100%;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(
+        45deg,
+        #00ffff,
+        #00aaff,
+        #ff00ff
+    );
+    background-size:300% 300%;
+    animation:gradientMove 5s ease infinite;
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 30px #00ffff,
+        0 0 60px #ff00ff;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #00ffff,
+        0 0 80px #ff00ff;
+}
+
+#pesan{
+    margin-top:20px;
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+    text-shadow:0 0 10px currentColor;
+}
+
+@keyframes gradientMove{
+    0%{
+        background-position:0% 50%;
     }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
 </style>
-
 </head>
+
 <body>
 
-<h2>Form Data Wisatawan</h2>
+<div class="container">
+
+<div class="card">
+
+<h2>DATA WISATAWAN</h2>
 
 <form id="formWisatawan">
 
-    <div class="form-group">
-        <label for="id_wisatawan">ID Wisatawan</label>
-        <input type="text" id="id_wisatawan" placeholder="Contoh: W00001" required>
-    </div>
+<div class="form-group">
+<label>ID Wisatawan</label>
+<input
+type="text"
+id="id_wisatawan"
+placeholder="Contoh : W00001"
+required>
+</div>
 
-    <div class="form-group">
-        <label for="nama_wisatawan">Nama Wisatawan</label>
-        <input type="text" id="nama_wisatawan" placeholder="Masukkan Nama Wisatawan" required>
-    </div>
+<div class="form-group">
+<label>Nama Wisatawan</label>
+<input
+type="text"
+id="nama_wisatawan"
+placeholder="Masukkan Nama Wisatawan"
+required>
+</div>
 
-    <div class="form-group">
-        <label for="tempat_lahir">Tempat Lahir</label>
-        <input type="text" id="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
-    </div>
+<div class="form-group">
+<label>Tempat Lahir</label>
+<input
+type="text"
+id="tempat_lahir"
+placeholder="Masukkan Tempat Lahir"
+required>
+</div>
 
-    <button type="submit">Simpan</button>
+<button type="submit">
+💾 SIMPAN DATA
+</button>
 
 </form>
 
 <div id="pesan"></div>
 
+</div>
+
+</div>
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
     getFirestore,
     doc,
     setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA3QTWS5FXX7_gL1I49JiqWgenLl3Jj7v8",
+    apiKey: "YOUR_API_KEY",
     authDomain: "amrulloh-8542c.firebaseapp.com",
     projectId: "amrulloh-8542c",
     storageBucket: "amrulloh-8542c.firebasestorage.app",
@@ -109,7 +253,7 @@ const db = getFirestore(app);
 const form = document.getElementById("formWisatawan");
 const pesan = document.getElementById("pesan");
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e)=>{
 
     e.preventDefault();
 
@@ -122,30 +266,31 @@ form.addEventListener("submit", async (e) => {
     const tempat_lahir =
         document.getElementById("tempat_lahir").value.trim();
 
-    try {
+    try{
 
         await setDoc(
-            doc(db, "wisatawan", id_wisatawan),
+            doc(db,"wisatawan",id_wisatawan),
             {
-                id_wisatawan: id_wisatawan,
-                nama_wisatawan: nama_wisatawan,
-                tempat_lahir: tempat_lahir,
-                created_at: new Date().toISOString()
+                id_wisatawan,
+                nama_wisatawan,
+                tempat_lahir,
+                created_at:new Date().toISOString()
             }
         );
 
-        pesan.style.color = "green";
-        pesan.innerHTML = "✓ Data wisatawan berhasil disimpan";
+        pesan.style.color="#00ff88";
+        pesan.innerHTML="✅ Data wisatawan berhasil disimpan";
 
         form.reset();
 
-    } catch (error) {
+    }catch(error){
 
         console.error(error);
 
-        pesan.style.color = "red";
-        pesan.innerHTML =
-            "✗ Gagal menyimpan data : " + error.message;
+        pesan.style.color="#ff4444";
+        pesan.innerHTML=
+        "❌ Gagal menyimpan data : " +
+        error.message;
     }
 
 });
@@ -154,3 +299,4 @@ form.addEventListener("submit", async (e) => {
 
 </body>
 </html>
+```
