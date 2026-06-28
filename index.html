@@ -375,7 +375,7 @@ hr{
         menuData = [];
         menuList.innerHTML = `<div class="card">Memuat menu dari restaurants/${currentRestaurantId}/menus...</div>`;
         menuSelect.innerHTML = `<option value="">Pilih Menu</option>`;
-        debugPath.innerHTML = `Path menu: restaurants/${currentRestaurantId}/menus`;
+        debugPath.innerHTML =`🍴 Selamat datang di ${getRestaurantName(currentRestaurantId)} - Nikmati hidangan terbaik kami`;
 
         const snapshot = await getDocs(
           collection(db, "restaurants", currentRestaurantId, "menus")
