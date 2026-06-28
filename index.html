@@ -6,197 +6,242 @@
   <title>Warung Nusantara</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-      background: #f5f5f5;
-      color: #222;
-    }
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#fff8e1,#f1f8e9);
+    padding:25px;
+    max-width:1300px;
+    margin:auto;
+    color:#333;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 8px;
-    }
+h1{
+    text-align:center;
+    font-size:3rem;
+    color:#d32f2f;
+    margin-bottom:10px;
+    text-shadow:2px 2px 10px rgba(0,0,0,.1);
+}
 
-    .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 30px;
-    }
+.subtitle{
+    text-align:center;
+    color:#2e7d32;
+    font-weight:600;
+    margin-bottom:35px;
+}
 
-    h2 {
-      margin-top: 28px;
-      margin-bottom: 14px;
-    }
+h2{
+    color:#d32f2f;
+    margin:25px 0 15px;
+}
 
-    .card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 10px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+.card{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    animation:fadeUp .5s ease;
+    transition:.3s;
+}
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
+.card:hover{
+    transform:translateY(-4px);
+}
 
-    .menu-card {
-      overflow: hidden;
-      padding: 0;
-    }
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
 
-    .menu-image {
-      width: 100%;
-      height: 170px;
-      background: #eeeeee;
-      display: grid;
-      place-items: center;
-      color: #888;
-      font-size: 42px;
-      overflow: hidden;
-    }
+.menu-card{
+    overflow:hidden;
+    border:none;
+}
 
-    .menu-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
+.menu-image{
+    width:100%;
+    height:220px;
+    overflow:hidden;
+}
 
-    .menu-body {
-      padding: 15px;
-    }
+.menu-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
 
-    .menu-body h3 {
-      margin-bottom: 8px;
-    }
+.menu-card:hover img{
+    transform:scale(1.1);
+}
 
-    .price {
-      font-weight: bold;
-      color: #1976D2;
-      margin: 8px 0;
-    }
+.menu-body{
+    padding:18px;
+}
 
-    .available {
-      color: green;
-      font-weight: bold;
-    }
+.menu-body h3{
+    color:#d32f2f;
+    margin-bottom:8px;
+}
 
-    .not-available {
-      color: red;
-      font-weight: bold;
-    }
+.price{
+    color:#ff9800;
+    font-size:18px;
+    font-weight:700;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
+.available{
+    color:#2e7d32;
+    font-weight:bold;
+}
 
-    label {
-      font-weight: bold;
-      font-size: 14px;
-    }
+.not-available{
+    color:#d32f2f;
+    font-weight:bold;
+}
 
-    button {
-      padding: 12px;
-      background: #2196F3;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:2px solid #fbc02d;
+    border-radius:12px;
+    margin-top:8px;
+    margin-bottom:15px;
+    transition:.3s;
+}
 
-    button:hover {
-      background: #1976D2;
-    }
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#2e7d32;
+    box-shadow:0 0 10px rgba(46,125,50,.2);
+}
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+label{
+    font-weight:600;
+    color:#444;
+}
 
-    .btn-full {
-      width: 100%;
-    }
+button{
+    border:none;
+    padding:13px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+    transition:.3s;
+}
 
-    .btn-small {
-      padding: 8px 10px;
-      font-size: 12px;
-      margin: 3px;
-      width: auto;
-    }
+.btn-full{
+    width:100%;
+    background:linear-gradient(45deg,#d32f2f,#ff9800);
+}
 
-    .btn-done {
-      background: #4CAF50;
-    }
+.btn-full:hover{
+    transform:scale(1.02);
+}
 
-    .btn-done:hover {
-      background: #388E3C;
-    }
+.btn-small{
+    background:#fbc02d;
+    color:#333;
+    margin:3px;
+}
 
-    #status {
-      margin: 15px 0;
-      padding: 10px;
-      background: #e8f5e9;
-      border-radius: 5px;
-      display: none;
-    }
+.btn-small:hover{
+    background:#ff9800;
+}
 
-    .error {
-      background: #ffebee !important;
-      color: #b71c1c;
-    }
+.btn-done{
+    background:#2e7d32;
+    color:white;
+}
 
-    .info-box {
-      background: #e3f2fd;
-      border-left: 4px solid #2196F3;
-      padding: 12px;
-      margin: 12px 0 18px;
-      border-radius: 6px;
-      color: #0d47a1;
-      font-size: 14px;
-    }
+.btn-done:hover{
+    background:#1b5e20;
+}
 
-    .order-card {
-      border-left: 5px solid #2196F3;
-    }
+.info-box{
+    background:#fff8e1;
+    border-left:5px solid #fbc02d;
+    color:#795548;
+    border-radius:10px;
+    padding:15px;
+    margin-top:10px;
+}
 
-    .status-badge {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 6px;
-      background: #eeeeee;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+#status{
+    display:none;
+    padding:15px;
+    border-radius:12px;
+    background:#e8f5e9;
+    color:#1b5e20;
+    margin-bottom:20px;
+}
 
-    .status-pending { background: #fff3cd; color: #856404; }
-    .status-cooking { background: #e3f2fd; color: #0d47a1; }
-    .status-ready { background: #e8f5e9; color: #1b5e20; }
-    .status-done { background: #eeeeee; color: #555; }
+.error{
+    background:#ffebee!important;
+    color:#b71c1c!important;
+}
 
-    ul {
-      margin-left: 18px;
-      line-height: 1.7;
+.order-card{
+    border-left:6px solid #2e7d32;
+}
+
+.status-badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.status-pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status-cooking{
+    background:#ffe0b2;
+    color:#e65100;
+}
+
+.status-ready{
+    background:#c8e6c9;
+    color:#1b5e20;
+}
+
+.status-done{
+    background:#dcedc8;
+    color:#33691e;
+}
+
+hr{
+    border:none;
+    height:3px;
+    background:linear-gradient(to right,#d32f2f,#fbc02d,#2e7d32);
+    margin:30px 0;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
     }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
   </style>
 </head>
 
