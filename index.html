@@ -25,58 +25,26 @@ h1{
     background:#f9f9f9;
 }
 
-input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-}
-
-button{
-    padding:10px 20px;
-    cursor:pointer;
-}
-
 #status{
     background:#eee;
-    padding:10px;
-    border-radius:8px;
+    padding:15px;
+    border-radius:10px;
     margin-bottom:20px;
 }
 </style>
+
 </head>
 <body>
 
 <h1>Warung Nusantara</h1>
 
-<div id="status">Memuat data...</div>
+<div id="status">
+Memuat data...
+</div>
 
-<h2>Daftar Menu</h2>
+<h2>Data Restaurant</h2>
 
 <div id="menuList"></div>
-
-<hr>
-
-<h2>Tambah Pesanan</h2>
-
-<form id="orderForm">
-
-<input
-type="text"
-id="customerId"
-placeholder="customer1"
-required>
-
-<input
-type="number"
-id="tableNumber"
-placeholder="Nomor Meja"
-required>
-
-<button type="submit">
-Simpan Pesanan
-</button>
-
-</form>
 
 <script type="module">
 
@@ -85,9 +53,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
 getFirestore,
 collection,
-getDocs,
-addDoc,
-Timestamp
+getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -103,47 +69,34 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function loadMenu(){
+async function loadRestaurants(){
 
 const status = document.getElementById("status");
 const menuList = document.getElementById("menuList");
 
 try{
 
-console.log("Mengambil data menu...");
-
 const snapshot = await getDocs(
-collection(
-db,
-"restaurants",
-"resto1",
-"menus"
-)
+collection(db,"restaurants")
 );
 
-console.log("Jumlah menu:", snapshot.size);
+console.log("Jumlah Restaurant:", snapshot.size);
 
 status.innerHTML =
-"Jumlah menu ditemukan : " + snapshot.size;
-
-if(snapshot.empty){
-menuList.innerHTML =
-"<p>Tidak ada menu ditemukan.</p>";
-return;
-}
+"Jumlah Restaurant: " + snapshot.size;
 
 snapshot.forEach((doc)=>{
 
-const data = doc.data();
+console.log(doc.id, doc.data());
 
-console.log(doc.id, data);
+const data = doc.data();
 
 menuList.innerHTML += `
 <div class="card">
 <h3>${data.name}</h3>
-<p><b>Harga:</b> Rp ${data.price}</p>
-<p><b>Kategori:</b> ${data.category}</p>
-<p><b>Tersedia:</b> ${data.available}</p>
+<p>${data.address}</p>
+<p>${data.openHours}</p>
+<p>ID : ${doc.id}</p>
 </div>
 `;
 
@@ -160,47 +113,7 @@ status.innerHTML =
 
 }
 
-loadMenu();
-
-document
-.getElementById("orderForm")
-.addEventListener("submit", async(e)=>{
-
-e.preventDefault();
-
-try{
-
-await addDoc(
-collection(db,"orders"),
-{
-customerId:
-document.getElementById("customerId").value,
-
-restaurantId:"resto1",
-
-tableNumber:
-parseInt(
-document.getElementById("tableNumber").value
-),
-
-status:"pending",
-
-totalPrice:50000,
-
-createdAt:
-Timestamp.now()
-}
-);
-
-alert("Pesanan berhasil disimpan!");
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-});
+loadRestaurants();
 
 </script>
 
