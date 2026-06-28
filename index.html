@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +8,7 @@
 <style>
 body{
     font-family: Arial, sans-serif;
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
     padding:20px;
 }
@@ -18,14 +17,21 @@ h1{
     text-align:center;
 }
 
+.card{
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    margin:10px 0;
+    background:#f5f5f5;
+}
+
 #status{
     background:#eee;
-    padding:15px;
+    padding:20px;
     border-radius:10px;
     margin-bottom:20px;
 }
 </style>
-
 </head>
 <body>
 
@@ -35,15 +41,21 @@ h1{
 Memuat data...
 </div>
 
+<h2>Data Firebase</h2>
+
+<div id="data"></div>
+
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore,
 collection,
 getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8RfAE6XcxpM9PB8xecL19KOC6aaoNUTc",
@@ -58,11 +70,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function loadRestaurants(){
+async function loadData(){
 
 const status = document.getElementById("status");
+const dataDiv = document.getElementById("data");
 
 try{
+
+console.log("Project :", firebaseConfig.projectId);
 
 const customers = await getDocs(
 collection(db,"customers")
@@ -76,28 +91,45 @@ const restaurants = await getDocs(
 collection(db,"restaurants")
 );
 
-console.log("Customers:", customers.size);
-console.log("Orders:", orders.size);
-console.log("Restaurants:", restaurants.size);
+console.log("Customers :", customers.size);
+console.log("Orders :", orders.size);
+console.log("Restaurants :", restaurants.size);
 
 status.innerHTML = `
-Customers : ${customers.size}<br>
-Orders : ${orders.size}<br>
-Restaurants : ${restaurants.size}
+<b>Customers :</b> ${customers.size}<br>
+<b>Orders :</b> ${orders.size}<br>
+<b>Restaurants :</b> ${restaurants.size}
 `;
+
+restaurants.forEach((doc)=>{
+
+const data = doc.data();
+
+dataDiv.innerHTML += `
+<div class="card">
+<h3>${data.name}</h3>
+<p>${data.address}</p>
+<p>${data.openHours}</p>
+<p><b>ID :</b> ${doc.id}</p>
+</div>
+`;
+
+console.log(doc.id,data);
+
+});
 
 }catch(error){
 
 console.error(error);
 
 status.innerHTML =
-"ERROR : " + error.message;
+"<b>ERROR :</b> " + error.message;
 
 }
 
 }
 
-loadRestaurants();
+loadData();
 
 </script>
 
