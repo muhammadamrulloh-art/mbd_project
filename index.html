@@ -1,655 +1,559 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warung Nusantara</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warung Nusantara</title>
 
-<style>
-*{
-    box-sizing:border-box;
-}
-
-body{
-    font-family: Arial, sans-serif;
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-    background:#f5f5f5;
-    color:#222;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
-}
-
-.card{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin:10px 0;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.grid-menu{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:16px;
-}
-
-.menu-card{
-    overflow:hidden;
-    padding:0;
-}
-
-.menu-image{
-    width:100%;
-    height:170px;
-    background:#eaeaea;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    color:#999;
-    font-size:40px;
-}
-
-.menu-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    display:block;
-}
-
-.menu-body{
-    padding:15px;
-}
-
-.menu-body h3{
-    margin-bottom:8px;
-}
-
-.price{
-    font-weight:bold;
-    color:#1976D2;
-}
-
-.available{
-    color:#0f9d58;
-    font-weight:bold;
-}
-
-.not-available{
-    color:#d93025;
-    font-weight:bold;
-}
-
-input,select{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:6px;
-    outline:none;
-}
-
-input:focus,select:focus{
-    border-color:#2196F3;
-}
-
-button{
-    padding:12px;
-    background:#2196F3;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#1976D2;
-}
-
-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-.btn-full{
-    width:100%;
-    margin-top:10px;
-}
-
-.btn-status{
-    padding:8px 10px;
-    margin:4px 4px 0 0;
-    font-size:12px;
-    background:#555;
-}
-
-.btn-status:hover{
-    background:#333;
-}
-
-.status-badge{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:20px;
-    background:#eee;
-    font-size:12px;
-    font-weight:bold;
-    text-transform:uppercase;
-}
-
-.status-pending{background:#fff3cd;color:#856404;}
-.status-cooking{background:#cfe2ff;color:#084298;}
-.status-ready{background:#d1e7dd;color:#0f5132;}
-.status-done{background:#e2e3e5;color:#41464b;}
-
-#status{
-    margin:15px 0;
-    padding:10px;
-    background:#e8f5e9;
-    border-radius:5px;
-    display:none;
-}
-
-#errorBox{
-    margin:15px 0;
-    padding:10px;
-    background:#fdecea;
-    color:#b00020;
-    border-radius:5px;
-    display:none;
-}
-
-.section{
-    margin-top:28px;
-}
-
-.order-layout{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.order-items{
-    margin-left:18px;
-    line-height:1.8;
-}
-
-.empty{
-    background:white;
-    padding:16px;
-    border-radius:10px;
-    color:#666;
-    box-shadow:0 2px 5px rgba(0,0,0,0.08);
-}
-
-@media(max-width:760px){
-    body{
-        padding:14px;
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .order-layout{
-        grid-template-columns:1fr;
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #222;
     }
-}
-</style>
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .menu-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .menu-image {
+      width: 100%;
+      height: 170px;
+      background: #eeeeee;
+      display: grid;
+      place-items: center;
+      color: #888;
+      font-size: 42px;
+      overflow: hidden;
+    }
+
+    .menu-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .menu-body {
+      padding: 15px;
+    }
+
+    .menu-body h3 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #1976D2;
+      margin: 8px 0;
+    }
+
+    .available {
+      color: green;
+      font-weight: bold;
+    }
+
+    .not-available {
+      color: red;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 12px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1976D2;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn-small {
+      padding: 8px 10px;
+      font-size: 12px;
+      margin: 3px;
+      width: auto;
+    }
+
+    .btn-done {
+      background: #4CAF50;
+    }
+
+    .btn-done:hover {
+      background: #388E3C;
+    }
+
+    #status {
+      margin: 15px 0;
+      padding: 10px;
+      background: #e8f5e9;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .error {
+      background: #ffebee !important;
+      color: #b71c1c;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #2196F3;
+      padding: 12px;
+      margin: 12px 0 18px;
+      border-radius: 6px;
+      color: #0d47a1;
+      font-size: 14px;
+    }
+
+    .order-card {
+      border-left: 5px solid #2196F3;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #eeeeee;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-cooking { background: #e3f2fd; color: #0d47a1; }
+    .status-ready { background: #e8f5e9; color: #1b5e20; }
+    .status-done { background: #eeeeee; color: #555; }
+
+    ul {
+      margin-left: 18px;
+      line-height: 1.7;
+    }
+  </style>
 </head>
 
 <body>
+  <h1>Warung Nusantara</h1>
+  <p class="subtitle">Sistem pemesanan digital restoran</p>
 
-<h1>Warung Nusantara</h1>
-<p class="subtitle">Sistem pemesanan digital restoran berbasis Cloud Firestore</p>
-
-<div class="card">
-    <h2>Pilih Lokasi Restoran</h2>
+  <div class="card">
+    <label for="restaurantSelect">Pilih Lokasi Restoran</label>
     <select id="restaurantSelect">
-        <option value="resto1">Warung Nusantara Jombang</option>
-        <option value="resto2">Warung Nusantara Malang</option>
+      <option value="resto1">Warung Nusantara Jombang</option>
+      <option value="resto2">Warung Nusantara Malang</option>
     </select>
-</div>
-
-<div class="section">
-    <h2>Daftar Menu</h2>
-    <div id="menuList" class="grid-menu">
-        <div class="empty">Memuat menu...</div>
+    <div class="info-box" id="debugPath">
+      Path menu: restaurants/resto1/menus
     </div>
-</div>
+  </div>
 
-<hr class="section">
+  <h2>Daftar Menu</h2>
+  <div id="menuList" class="menu-grid">
+    <div class="card">Memuat menu...</div>
+  </div>
 
-<div class="section order-layout">
-    <div class="card">
-        <h2>Tambah Pesanan</h2>
+  <hr>
 
-        <form id="orderForm">
-            <input type="text" id="customerId" placeholder="ID Customer, contoh: customer1" required>
-            <input type="text" id="customerName" placeholder="Nama Pelanggan / Mahasiswa" required>
-            <input type="text" id="customerPhone" placeholder="Nomor HP" required>
+  <h2>Tambah Pesanan</h2>
 
-            <input type="number" id="tableNumber" placeholder="Nomor Meja" min="1" required>
+  <form id="orderForm" class="card">
+    <label for="customerId">ID Customer</label>
+    <input type="text" id="customerId" placeholder="Contoh: customer1" required>
 
-            <select id="menuSelect" required>
-                <option value="">Pilih Menu</option>
-            </select>
+    <label for="customerName">Nama Pelanggan</label>
+    <input type="text" id="customerName" placeholder="Contoh: Muhammad Amrulloh" required>
 
-            <input type="number" id="qty" placeholder="Jumlah Pesanan" min="1" value="1" required>
+    <label for="customerPhone">Nomor HP</label>
+    <input type="text" id="customerPhone" placeholder="Contoh: 085335944931" required>
 
-            <button type="submit" class="btn-full" id="submitBtn">
-                Simpan Pesanan
-            </button>
-        </form>
+    <label for="tableNumber">Nomor Meja</label>
+    <input type="number" id="tableNumber" placeholder="Contoh: 5" min="1" required>
 
-        <div id="status"></div>
-        <div id="errorBox"></div>
-    </div>
+    <label for="menuSelect">Pilih Menu</label>
+    <select id="menuSelect" required>
+      <option value="">Pilih Menu</option>
+    </select>
 
-    <div class="card">
-        <h2>Ringkasan Sistem</h2>
-        <p>Menu diambil dari:</p>
-        <p><b id="menuPath">restaurants/resto1/menus</b></p>
-        <p>Pesanan masuk ke koleksi <b>orders</b> dan detail menu masuk ke sub-koleksi <b>orderItems</b>.</p>
-    </div>
-</div>
+    <label for="qty">Jumlah Pesanan</label>
+    <input type="number" id="qty" placeholder="Jumlah Pesanan" min="1" value="1" required>
 
-<div class="section">
-    <h2>Data Pesanan</h2>
-    <div id="orderList">
-        <div class="empty">Memuat data pesanan...</div>
-    </div>
-</div>
+    <button type="submit" class="btn-full" id="submitBtn">Simpan Pesanan</button>
+  </form>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  <div id="status"></div>
 
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    doc,
-    setDoc,
-    getDocs,
-    updateDoc,
-    onSnapshot,
-    query,
-    orderBy,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  <h2>Data Pesanan</h2>
+  <div id="orderList">
+    <div class="card">Memuat data pesanan...</div>
+  </div>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyB8RfAE6XcxpM9PB8xecL19KOC6aaoNUTc",
-    authDomain: "warung-nusantara-3ed35.firebaseapp.com",
-    projectId: "warung-nusantara-3ed35",
-    storageBucket: "warung-nusantara-3ed35.firebasestorage.app",
-    messagingSenderId: "272732432024",
-    appId: "1:272732432024:web:501db56158602e502c12ed",
-    measurementId: "G-8QEMPK42JR"
-};
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      addDoc,
+      doc,
+      setDoc,
+      updateDoc,
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const RESTAURANTS = {
-    resto1: {
-        id: "resto1",
-        name: "Warung Nusantara Jombang"
-    },
-    resto2: {
-        id: "resto2",
-        name: "Warung Nusantara Malang"
-    }
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyB8RfAE6XcxpM9PB8xecL19KOC6aaoNUTc",
+      authDomain: "warung-nusantara-3ed35.firebaseapp.com",
+      projectId: "warung-nusantara-3ed35",
+      storageBucket: "warung-nusantara-3ed35.firebasestorage.app",
+      messagingSenderId: "272732432024",
+      appId: "1:272732432024:web:501db56158602e502c12ed",
+      measurementId: "G-8QEMPK42JR"
+    };
 
-let currentRestaurantId = "resto1";
-let menuData = [];
-let unsubscribeMenus = null;
-let unsubscribeOrders = null;
+    const app = initializeApp(firebaseConfig);
 
-const restaurantSelect = document.getElementById("restaurantSelect");
-const menuList = document.getElementById("menuList");
-const menuSelect = document.getElementById("menuSelect");
-const orderForm = document.getElementById("orderForm");
-const statusBox = document.getElementById("status");
-const errorBox = document.getElementById("errorBox");
-const orderList = document.getElementById("orderList");
-const menuPath = document.getElementById("menuPath");
-const submitBtn = document.getElementById("submitBtn");
+    // PENTING:
+    // Screenshot Firebase kamu memakai database ID: default
+    // Karena itu kode harus memakai getFirestore(app, "default").
+    // Kalau database kamu bernama (default), ubah menjadi: const db = getFirestore(app);
+    const db = getFirestore(app, "default");
 
-function showStatus(message){
-    statusBox.style.display = "block";
-    statusBox.innerHTML = message;
-    setTimeout(() => {
-        statusBox.style.display = "none";
-    }, 3500);
-}
+    let currentRestaurantId = "resto1";
+    let menuData = [];
 
-function showError(message){
-    errorBox.style.display = "block";
-    errorBox.innerHTML = message;
-}
+    const restaurantSelect = document.getElementById("restaurantSelect");
+    const debugPath = document.getElementById("debugPath");
+    const menuList = document.getElementById("menuList");
+    const menuSelect = document.getElementById("menuSelect");
+    const orderForm = document.getElementById("orderForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("status");
+    const orderList = document.getElementById("orderList");
 
-function clearError(){
-    errorBox.style.display = "none";
-    errorBox.innerHTML = "";
-}
-
-function formatRupiah(number){
-    return new Intl.NumberFormat("id-ID", {
+    function formatRupiah(value) {
+      return new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
         minimumFractionDigits: 0
-    }).format(Number(number) || 0);
-}
-
-function getMenuPrice(menu){
-    return Number(menu.price ?? menu.Price ?? 0);
-}
-
-function getMenuImage(menu){
-    return String(
-        menu.imageUrl ||
-        menu.imageURL ||
-        menu.ImageUrl ||
-        menu.gambar ||
-        menu.foto ||
-        ""
-    ).trim();
-}
-
-function escapeHTML(value){
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-function renderMenus(){
-    menuSelect.innerHTML = `<option value="">Pilih Menu</option>`;
-
-    if(menuData.length === 0){
-        menuList.innerHTML = `
-            <div class="empty">
-                Menu belum tersedia. Cek path: restaurants/${currentRestaurantId}/menus
-            </div>
-        `;
-        return;
+      }).format(Number(value) || 0);
     }
 
-    menuList.innerHTML = menuData.map((menu) => {
-        const price = getMenuPrice(menu);
-        const imageUrl = getMenuImage(menu);
-        const available = menu.available !== false;
-
-        menuSelect.innerHTML += `
-            <option value="${escapeHTML(menu.id)}" ${available ? "" : "disabled"}>
-                ${escapeHTML(menu.name)} - ${formatRupiah(price)}${available ? "" : " (Habis)"}
-            </option>
-        `;
-
-        const imageHTML = imageUrl
-            ? `<img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(menu.name)}">`
-            : `<span>🍽️</span>`;
-
-        return `
-            <div class="card menu-card">
-                <div class="menu-image">
-                    ${imageHTML}
-                </div>
-
-                <div class="menu-body">
-                    <h3>${escapeHTML(menu.name)}</h3>
-                    <p>Harga: <span class="price">${formatRupiah(price)}</span></p>
-                    <p>Kategori: ${escapeHTML(menu.category || "Menu")}</p>
-                    <p class="${available ? "available" : "not-available"}">
-                        ${available ? "Tersedia" : "Habis"}
-                    </p>
-                </div>
-            </div>
-        `;
-    }).join("");
-
-    menuList.querySelectorAll("img").forEach((img) => {
-        img.addEventListener("error", () => {
-            img.parentElement.innerHTML = `<span>🍽️</span>`;
-        });
-    });
-}
-
-function listenMenu(){
-    clearError();
-
-    if(unsubscribeMenus){
-        unsubscribeMenus();
+    function showStatus(message, isError = false) {
+      statusBox.style.display = "block";
+      statusBox.className = isError ? "error" : "";
+      statusBox.innerHTML = message;
     }
 
-    menuData = [];
-    menuList.innerHTML = `<div class="empty">Memuat menu...</div>`;
-    menuPath.textContent = `restaurants/${currentRestaurantId}/menus`;
-
-    const menuRef = collection(db, "restaurants", currentRestaurantId, "menus");
-
-    unsubscribeMenus = onSnapshot(
-        menuRef,
-        (snapshot) => {
-            menuData = snapshot.docs.map((menuDoc) => ({
-                id: menuDoc.id,
-                ...menuDoc.data()
-            }));
-
-            renderMenus();
-        },
-        (error) => {
-            console.error(error);
-            showError("Gagal mengambil menu. Cek Firebase config, rules, dan path restaurants/" + currentRestaurantId + "/menus.");
-        }
-    );
-}
-
-async function readOrderItems(orderId){
-    const itemSnapshot = await getDocs(collection(db, "orders", orderId, "orderItems"));
-    return itemSnapshot.docs.map((itemDoc) => itemDoc.data());
-}
-
-function getOrderRestaurantId(order){
-    if(typeof order.restaurantId === "string"){
-        return order.restaurantId;
+    function getRestaurantName(restaurantId) {
+      if (restaurantId === "resto1") return "Warung Nusantara Jombang";
+      if (restaurantId === "resto2") return "Warung Nusantara Malang";
+      return restaurantId;
     }
 
-    if(order.restaurantId?.id){
-        return order.restaurantId.id;
+    function getMenuImage(imageUrl) {
+      const value = String(imageUrl || "").trim();
+      return value;
     }
 
-    if(order.restaurantId?.path){
-        return order.restaurantId.path.split("/").pop();
-    }
+    async function loadMenu() {
+      try {
+        menuData = [];
+        menuList.innerHTML = `<div class="card">Memuat menu dari restaurants/${currentRestaurantId}/menus...</div>`;
+        menuSelect.innerHTML = `<option value="">Pilih Menu</option>`;
+        debugPath.innerHTML = `Path menu: restaurants/${currentRestaurantId}/menus`;
 
-    return "";
-}
+        const snapshot = await getDocs(
+          collection(db, "restaurants", currentRestaurantId, "menus")
+        );
 
-async function renderOrders(snapshot){
-    const orders = snapshot.docs
-        .map((orderDoc) => ({
-            id: orderDoc.id,
-            ...orderDoc.data()
-        }))
-        .filter((order) => getOrderRestaurantId(order) === currentRestaurantId);
-
-    if(orders.length === 0){
-        orderList.innerHTML = `<div class="empty">Belum ada pesanan untuk restoran ini.</div>`;
-        return;
-    }
-
-    const html = await Promise.all(orders.map(async(order) => {
-        const items = await readOrderItems(order.id);
-
-        const itemHTML = items.length === 0
-            ? `<li>Detail item belum tersedia.</li>`
-            : items.map((item) => `
-                <li>
-                    ${escapeHTML(item.menuName || item.name || "Menu")} x ${Number(item.qty) || 0}
-                    — ${formatRupiah(item.subtotal)}
-                </li>
-            `).join("");
-
-        const status = order.status || "pending";
-
-        return `
+        if (snapshot.empty) {
+          menuList.innerHTML = `
             <div class="card">
-                <h3>Meja ${escapeHTML(order.tableNumber || "-")}</h3>
-                <p>Status: <span class="status-badge status-${escapeHTML(status)}">${escapeHTML(status)}</span></p>
-                <p>Customer: <b>${escapeHTML(order.customerName || order.customerId || "-")}</b></p>
-                <p>Total: <b>${formatRupiah(order.totalPrice)}</b></p>
-
-                <ul class="order-items">
-                    ${itemHTML}
-                </ul>
-
-                <button class="btn-status" data-id="${escapeHTML(order.id)}" data-status="pending">Pending</button>
-                <button class="btn-status" data-id="${escapeHTML(order.id)}" data-status="cooking">Proses Masak</button>
-                <button class="btn-status" data-id="${escapeHTML(order.id)}" data-status="ready">Siap Disajikan</button>
-                <button class="btn-status" data-id="${escapeHTML(order.id)}" data-status="done">Selesai</button>
+              Menu belum tersedia untuk ${getRestaurantName(currentRestaurantId)}.<br>
+              Pastikan data ada di path: <b>restaurants/${currentRestaurantId}/menus</b>
             </div>
-        `;
-    }));
-
-    orderList.innerHTML = html.join("");
-
-    orderList.querySelectorAll(".btn-status").forEach((button) => {
-        button.addEventListener("click", async() => {
-            const orderId = button.dataset.id;
-            const status = button.dataset.status;
-
-            try{
-                await updateDoc(doc(db, "orders", orderId), {
-                    status: status,
-                    updatedAt: serverTimestamp()
-                });
-
-                showStatus("✅ Status pesanan berhasil diubah menjadi " + status);
-            }catch(error){
-                console.error(error);
-                showError("Gagal mengubah status pesanan.");
-            }
-        });
-    });
-}
-
-function listenOrders(){
-    if(unsubscribeOrders){
-        unsubscribeOrders();
-    }
-
-    const orderQuery = query(collection(db, "orders"), orderBy("createdAt", "desc"));
-
-    unsubscribeOrders = onSnapshot(
-        orderQuery,
-        (snapshot) => {
-            renderOrders(snapshot);
-        },
-        (error) => {
-            console.error(error);
-            showError("Gagal mengambil data pesanan. Pastikan setiap order memiliki field createdAt.");
+          `;
+          return;
         }
-    );
-}
 
-restaurantSelect.addEventListener("change", () => {
-    currentRestaurantId = restaurantSelect.value;
-    listenMenu();
-    listenOrders();
-    showStatus("✅ Lokasi restoran diganti ke " + RESTAURANTS[currentRestaurantId].name);
-});
+        let menuHtml = "";
 
-orderForm.addEventListener("submit", async(e) => {
-    e.preventDefault();
-    clearError();
+        snapshot.forEach((menuDoc) => {
+          const data = menuDoc.data();
+          const menu = {
+            id: menuDoc.id,
+            name: data.name || "Tanpa Nama",
+            price: Number(data.price) || 0,
+            category: data.category || "Menu",
+            available: data.available !== false,
+            imageUrl: getMenuImage(data.imageUrl)
+          };
 
-    const customerId = document.getElementById("customerId").value.trim();
-    const customerName = document.getElementById("customerName").value.trim();
-    const customerPhone = document.getElementById("customerPhone").value.trim();
-    const tableNumber = Number(document.getElementById("tableNumber").value);
-    const menuId = document.getElementById("menuSelect").value;
-    const qty = Number(document.getElementById("qty").value);
+          menuData.push(menu);
 
-    const selectedMenu = menuData.find((menu) => menu.id === menuId);
+          const imageHtml = menu.imageUrl
+            ? `<img src="${menu.imageUrl}" alt="${menu.name}">`
+            : `🍽️`;
 
-    if(!selectedMenu){
-        showError("Pilih menu terlebih dahulu.");
-        return;
+          menuHtml += `
+            <div class="card menu-card">
+              <div class="menu-image">${imageHtml}</div>
+              <div class="menu-body">
+                <h3>${menu.name}</h3>
+                <p>Kategori: ${menu.category}</p>
+                <p class="price">Harga: ${formatRupiah(menu.price)}</p>
+                <p class="${menu.available ? "available" : "not-available"}">
+                  ${menu.available ? "Tersedia" : "Tidak tersedia"}
+                </p>
+              </div>
+            </div>
+          `;
+
+          if (menu.available) {
+            menuSelect.innerHTML += `
+              <option value="${menu.id}">${menu.name} - ${formatRupiah(menu.price)}</option>
+            `;
+          }
+        });
+
+        menuList.innerHTML = menuHtml;
+      } catch (error) {
+        console.error(error);
+        menuList.innerHTML = `
+          <div class="card" style="color:red;">
+            Gagal memuat menu. Cek Firebase config, database ID, rules, dan path restaurants/${currentRestaurantId}/menus.
+          </div>
+        `;
+        showStatus(`❌ Gagal memuat menu: ${error.message}`, true);
+      }
     }
 
-    if(!customerId || !customerName || !customerPhone || !tableNumber || !qty){
-        showError("Lengkapi semua data pesanan.");
+    restaurantSelect.addEventListener("change", () => {
+      currentRestaurantId = restaurantSelect.value;
+      loadMenu();
+      loadOrdersRealtime();
+    });
+
+    orderForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const customerId = document.getElementById("customerId").value.trim();
+      const customerName = document.getElementById("customerName").value.trim();
+      const customerPhone = document.getElementById("customerPhone").value.trim();
+      const tableNumber = parseInt(document.getElementById("tableNumber").value);
+      const menuId = document.getElementById("menuSelect").value;
+      const qty = parseInt(document.getElementById("qty").value);
+
+      const selectedMenu = menuData.find((menu) => menu.id === menuId);
+
+      if (!selectedMenu) {
+        showStatus("❌ Pilih menu terlebih dahulu.", true);
         return;
-    }
+      }
 
-    const unitPrice = getMenuPrice(selectedMenu);
-    const subtotal = unitPrice * qty;
+      if (!customerId || !customerName || !customerPhone || !tableNumber || !qty) {
+        showStatus("❌ Lengkapi semua data pesanan.", true);
+        return;
+      }
 
-    try{
+      const subtotal = selectedMenu.price * qty;
+
+      try {
         submitBtn.disabled = true;
         submitBtn.textContent = "Menyimpan...";
 
         await setDoc(
-            doc(db, "customers", customerId),
-            {
-                name: customerName,
-                phone: customerPhone,
-                loyaltyPoints: 0
-            },
-            { merge: true }
+          doc(db, "customers", customerId),
+          {
+            name: customerName,
+            phone: customerPhone,
+            loyaltyPoints: 0
+          },
+          { merge: true }
         );
 
         const orderRef = await addDoc(collection(db, "orders"), {
-            customerId: customerId,
-            customerName: customerName,
-            customerPhone: customerPhone,
-            restaurantId: currentRestaurantId,
-            restaurantName: RESTAURANTS[currentRestaurantId].name,
-            tableNumber: tableNumber,
-            status: "pending",
-            totalPrice: subtotal,
-            createdAt: serverTimestamp()
+          customerId: customerId,
+          customerName: customerName,
+          customerPhone: customerPhone,
+          restaurantId: currentRestaurantId,
+          restaurantName: getRestaurantName(currentRestaurantId),
+          tableNumber: tableNumber,
+          status: "pending",
+          totalPrice: subtotal,
+          createdAt: serverTimestamp()
         });
 
-        await setDoc(
-            doc(db, "orders", orderRef.id, "orderItems", "item1"),
-            {
-                menuId: selectedMenu.id,
-                menuName: selectedMenu.name,
-                qty: qty,
-                unitPrice: unitPrice,
-                subtotal: subtotal
-            }
-        );
+        await addDoc(collection(db, "orders", orderRef.id, "orderItems"), {
+          menuId: selectedMenu.id,
+          menuName: selectedMenu.name,
+          qty: qty,
+          unitPrice: selectedMenu.price,
+          subtotal: subtotal
+        });
 
+        showStatus("✅ Pesanan berhasil disimpan ke database.");
         orderForm.reset();
-        showStatus("✅ Pesanan berhasil disimpan.");
-    }catch(error){
+        menuSelect.innerHTML = `<option value="">Pilih Menu</option>`;
+        menuData.forEach((menu) => {
+          if (menu.available) {
+            menuSelect.innerHTML += `
+              <option value="${menu.id}">${menu.name} - ${formatRupiah(menu.price)}</option>
+            `;
+          }
+        });
+      } catch (error) {
         console.error(error);
-        showError("Gagal menyimpan pesanan. Cek koneksi, Firebase config, dan Firestore rules.");
-    }finally{
+        showStatus(`❌ Pesanan gagal disimpan: ${error.message}`, true);
+      } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Simpan Pesanan";
+      }
+    });
+
+    let unsubscribeOrders = null;
+
+    function loadOrdersRealtime() {
+      if (unsubscribeOrders) unsubscribeOrders();
+
+      unsubscribeOrders = onSnapshot(collection(db, "orders"), async (snapshot) => {
+        const orders = snapshot.docs
+          .map((orderDoc) => ({
+            id: orderDoc.id,
+            ...orderDoc.data()
+          }))
+          .filter((order) => order.restaurantId === currentRestaurantId)
+          .sort((a, b) => {
+            const aTime = a.createdAt?.seconds || 0;
+            const bTime = b.createdAt?.seconds || 0;
+            return bTime - aTime;
+          });
+
+        if (orders.length === 0) {
+          orderList.innerHTML = `<div class="card">Belum ada pesanan untuk ${getRestaurantName(currentRestaurantId)}.</div>`;
+          return;
+        }
+
+        const cards = await Promise.all(
+          orders.map(async (order) => {
+            const itemSnap = await getDocs(collection(db, "orders", order.id, "orderItems"));
+            const items = itemSnap.docs.map((itemDoc) => itemDoc.data());
+
+            const itemList = items.length
+              ? items.map((item) => `<li>${item.menuName} x ${item.qty} — ${formatRupiah(item.subtotal)}</li>`).join("")
+              : `<li>Belum ada orderItems</li>`;
+
+            const statusClass = `status-${order.status || "pending"}`;
+
+            return `
+              <div class="card order-card">
+                <span class="status-badge ${statusClass}">${order.status || "pending"}</span>
+                <h3>Meja ${order.tableNumber || "-"}</h3>
+                <p>Pelanggan: <b>${order.customerName || order.customerId || "-"}</b></p>
+                <p>Restoran: <b>${order.restaurantName || order.restaurantId || "-"}</b></p>
+                <p>Total: <b>${formatRupiah(order.totalPrice)}</b></p>
+                <ul>${itemList}</ul>
+                <button class="btn-small" onclick="updateOrderStatus('${order.id}', 'pending')">Pending</button>
+                <button class="btn-small" onclick="updateOrderStatus('${order.id}', 'cooking')">Proses Masak</button>
+                <button class="btn-small" onclick="updateOrderStatus('${order.id}', 'ready')">Siap Disajikan</button>
+                <button class="btn-small btn-done" onclick="updateOrderStatus('${order.id}', 'done')">Selesai</button>
+              </div>
+            `;
+          })
+        );
+
+        orderList.innerHTML = cards.join("");
+      }, (error) => {
+        console.error(error);
+        orderList.innerHTML = `<div class="card" style="color:red;">Gagal memuat data pesanan.</div>`;
+      });
     }
-});
 
-listenMenu();
-listenOrders();
-</script>
+    window.updateOrderStatus = async function(orderId, status) {
+      try {
+        await updateDoc(doc(db, "orders", orderId), {
+          status: status,
+          updatedAt: serverTimestamp()
+        });
+        showStatus(`✅ Status pesanan berhasil diubah menjadi ${status}.`);
+      } catch (error) {
+        console.error(error);
+        showStatus(`❌ Gagal mengubah status: ${error.message}`, true);
+      }
+    };
 
+    loadMenu();
+    loadOrdersRealtime();
+  </script>
 </body>
 </html>
