@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +9,7 @@
 <style>
 body{
     font-family: Arial, sans-serif;
-    max-width:1000px;
+    max-width:800px;
     margin:auto;
     padding:20px;
 }
@@ -19,31 +20,64 @@ h1{
 
 .card{
     border:1px solid #ddd;
-    border-radius:10px;
-    padding:15px;
+    padding:10px;
     margin:10px 0;
-    background:#f5f5f5;
+    border-radius:10px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    padding:10px 20px;
+    cursor:pointer;
 }
 
 #status{
-    background:#eee;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
+    padding:10px;
+    margin:10px 0;
+    background:#f5f5f5;
+    border-radius:8px;
 }
 </style>
+
 </head>
 <body>
 
 <h1>Warung Nusantara</h1>
 
-<div id="status">
-Memuat data...
-</div>
+<div id="status">Memuat data...</div>
 
-<h2>Data Firebase</h2>
+<h2>Daftar Menu</h2>
 
-<div id="data"></div>
+<div id="menuList"></div>
+
+<hr>
+
+<h2>Tambah Pesanan</h2>
+
+<form id="orderForm">
+
+<input
+type="text"
+id="customerId"
+placeholder="customer1"
+required>
+
+<input
+type="number"
+id="tableNumber"
+placeholder="Nomor Meja"
+required>
+
+<button type="submit">
+Simpan Pesanan
+</button>
+
+</form>
 
 <script type="module">
 
@@ -53,7 +87,9 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
 getFirestore,
 collection,
-getDocs
+getDocs,
+addDoc,
+Timestamp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -70,66 +106,105 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function loadData(){
+async function loadMenu() {
 
 const status = document.getElementById("status");
-const dataDiv = document.getElementById("data");
+const menuList = document.getElementById("menuList");
 
-try{
+try {
 
-console.log("Project :", firebaseConfig.projectId);
-
-const customers = await getDocs(
-collection(db,"customers")
+const snapshot = await getDocs(
+collection(
+db,
+"restaurants",
+"resto1",
+"menus"
+)
 );
 
-const orders = await getDocs(
-collection(db,"orders")
-);
+console.log("Jumlah menu:", snapshot.size);
 
-const restaurants = await getDocs(
-collection(db,"restaurants")
-);
+status.innerHTML =
+"Jumlah menu ditemukan: " + snapshot.size;
 
-console.log("Customers :", customers.size);
-console.log("Orders :", orders.size);
-console.log("Restaurants :", restaurants.size);
+if(snapshot.empty){
+menuList.innerHTML =
+"<p>Tidak ada menu ditemukan.</p>";
+return;
+}
 
-status.innerHTML = `
-<b>Customers :</b> ${customers.size}<br>
-<b>Orders :</b> ${orders.size}<br>
-<b>Restaurants :</b> ${restaurants.size}
-`;
-
-restaurants.forEach((doc)=>{
+snapshot.forEach((doc)=>{
 
 const data = doc.data();
 
-dataDiv.innerHTML += `
+console.log(doc.id,data);
+
+menuList.innerHTML += `
 <div class="card">
 <h3>${data.name}</h3>
-<p>${data.address}</p>
-<p>${data.openHours}</p>
-<p><b>ID :</b> ${doc.id}</p>
+<p>Harga : Rp ${data.price}</p>
+<p>Kategori : ${data.category}</p>
+<p>Tersedia : ${data.available}</p>
 </div>
 `;
 
-console.log(doc.id,data);
-
 });
 
-}catch(error){
+} catch(error){
 
 console.error(error);
 
 status.innerHTML =
-"<b>ERROR :</b> " + error.message;
+"ERROR : " + error.message;
 
 }
 
 }
 
-loadData();
+loadMenu();
+
+document
+.getElementById("orderForm")
+.addEventListener(
+"submit",
+async(e)=>{
+
+e.preventDefault();
+
+try{
+
+await addDoc(
+collection(db,"orders"),
+{
+customerId:
+document.getElementById("customerId").value,
+
+restaurantId:
+"resto1",
+
+tableNumber:
+parseInt(
+document.getElementById("tableNumber").value
+),
+
+status:"pending",
+
+totalPrice:50000,
+
+createdAt:
+Timestamp.now()
+}
+);
+
+alert("Pesanan berhasil disimpan");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
 
 </script>
 
