@@ -1,282 +1,83 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Data Wisatawan</title>
+<title>Warung Nusantara</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
-
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
-
-    background:
-    radial-gradient(circle at top left,#ff000055,transparent 40%),
-    radial-gradient(circle at bottom right,#ff222255,transparent 40%),
-    linear-gradient(135deg,#120000,#220000,#000000);
-
-    color:white;
+    font-family: Arial, sans-serif;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
 }
 
-.container{
-    width:100%;
-    max-width:900px;
+h1{
+    text-align:center;
 }
 
 .card{
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(15px);
-    border-radius:25px;
-    padding:35px;
-
-    box-shadow:
-    0 0 20px rgba(255,0,0,.8),
-    0 0 50px rgba(255,0,0,.6),
-    0 0 120px rgba(255,0,0,.5);
-}
-
-h2{
-    text-align:center;
-    margin-bottom:30px;
-    letter-spacing:3px;
-
-    text-shadow:
-    0 0 10px #ff0000,
-    0 0 20px #ff0000,
-    0 0 40px #ff0000,
-    0 0 80px #ff0000;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-label{
-    display:block;
-    margin-bottom:8px;
-    color:#ff4444;
-    font-weight:bold;
-
-    text-shadow:
-    0 0 10px #ff0000;
+    border:1px solid #ddd;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
 }
 
 input{
     width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:2px solid rgba(255,0,0,.5);
-
-    background:rgba(255,255,255,.05);
-
-    color:white;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
-}
-
-input::placeholder{
-    color:#ccc;
-}
-
-input:focus{
-    border-color:#ff0000;
-
-    box-shadow:
-    0 0 15px #ff0000,
-    0 0 30px #ff0000,
-    0 0 60px #ff0000;
+    padding:10px;
+    margin:10px 0;
 }
 
 button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-
-    color:white;
-    font-size:17px;
-    font-weight:bold;
+    padding:10px 20px;
     cursor:pointer;
-
-    background:linear-gradient(
-        45deg,
-        #ff0000,
-        #ff3333,
-        #ff6666
-    );
-
-    background-size:300% 300%;
-
-    animation:neon 4s infinite;
-
-    box-shadow:
-    0 0 20px #ff0000,
-    0 0 40px #ff0000,
-    0 0 80px #ff0000,
-    0 0 150px #ff0000;
-
-    transition:.3s;
 }
 
-button:hover{
-    transform:scale(1.03);
-
-    box-shadow:
-    0 0 30px #ff0000,
-    0 0 60px #ff0000,
-    0 0 120px #ff0000,
-    0 0 200px #ff0000;
+#status{
+    padding:10px;
+    margin:10px 0;
+    background:#f5f5f5;
+    border-radius:8px;
 }
-
-#pesan{
-    margin-top:15px;
-    text-align:center;
-    font-weight:bold;
-}
-
-.judul-data{
-    margin-top:35px;
-    margin-bottom:15px;
-    text-align:center;
-
-    text-shadow:
-    0 0 10px #ff0000,
-    0 0 20px #ff0000;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    overflow:hidden;
-    border-radius:15px;
-
-    box-shadow:
-    0 0 20px #ff0000;
-}
-
-thead{
-    background:#ff0000;
-}
-
-thead th{
-    padding:15px;
-    color:white;
-}
-
-tbody tr{
-    background:rgba(255,0,0,.08);
-    transition:.3s;
-}
-
-tbody tr:hover{
-    background:rgba(255,0,0,.25);
-}
-
-tbody td{
-    padding:14px;
-    border-bottom:1px solid rgba(255,0,0,.3);
-}
-
-@keyframes neon{
-
-    0%{
-        background-position:0% 50%;
-    }
-
-    50%{
-        background-position:100% 50%;
-    }
-
-    100%{
-        background-position:0% 50%;
-    }
-
-}
-
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="container">
+<h1>Warung Nusantara</h1>
 
-<div class="card">
+<div id="status">Memuat data...</div>
 
-<h2>🔥 DATA WISATAWAN 🔥</h2>
+<h2>Daftar Menu</h2>
 
-<form id="formWisatawan">
+<div id="menuList"></div>
 
-<div class="form-group">
-<label>ID Wisatawan</label>
+<hr>
+
+<h2>Tambah Pesanan</h2>
+
+<form id="orderForm">
+
 <input
 type="text"
-id="id_wisatawan"
-placeholder="Contoh : W00001"
+id="customerId"
+placeholder="customer1"
 required>
-</div>
 
-<div class="form-group">
-<label>Nama Wisatawan</label>
 <input
-type="text"
-id="nama_wisatawan"
-placeholder="Masukkan Nama Wisatawan"
+type="number"
+id="tableNumber"
+placeholder="Nomor Meja"
 required>
-</div>
-
-<div class="form-group">
-<label>Tempat Lahir</label>
-<input
-type="text"
-id="tempat_lahir"
-placeholder="Masukkan Tempat Lahir"
-required>
-</div>
 
 <button type="submit">
-💾 SIMPAN DATA
+Simpan Pesanan
 </button>
 
 </form>
-
-<div id="pesan"></div>
-
-<h3 class="judul-data">
-📋 DATA TERSIMPAN
-</h3>
-
-<table>
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Nama Wisatawan</th>
-<th>Tempat Lahir</th>
-</tr>
-</thead>
-
-<tbody id="dataBody">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
 
 <script type="module">
 
@@ -284,137 +85,128 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-    getFirestore,
-    doc,
-    setDoc,
-    collection,
-    onSnapshot
+getFirestore,
+collection,
+getDocs,
+addDoc,
+Timestamp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "amrulloh-8542c.firebaseapp.com",
-
-    projectId: "amrulloh-8542c",
-
-    storageBucket:
-    "amrulloh-8542c.firebasestorage.app",
-
-    messagingSenderId:
-    "231647011110",
-
-    appId:
-    "1:231647011110:web:7fb18a2e84499a5796e1e7"
+  apiKey: "AIzaSyB8RfAE6XcxpM9PB8xecL19KOC6aaoNUTc",
+  authDomain: "warung-nusantara-3ed35.firebaseapp.com",
+  projectId: "warung-nusantara-3ed35",
+  storageBucket: "warung-nusantara-3ed35.firebasestorage.app",
+  messagingSenderId: "272732432024",
+  appId: "1:272732432024:web:501db56158602e502c12ed",
+  measurementId: "G-8QEMPK42JR"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
-const form =
-document.getElementById("formWisatawan");
+async function loadMenu() {
 
-const pesan =
-document.getElementById("pesan");
+const status = document.getElementById("status");
+const menuList = document.getElementById("menuList");
 
-const dataBody =
-document.getElementById("dataBody");
+try {
 
-form.addEventListener(
-"submit",
-async (e)=>{
+const snapshot = await getDocs(
+collection(
+db,
+"restaurants",
+"resto1",
+"menus"
+)
+);
 
-    e.preventDefault();
+console.log("Jumlah menu:", snapshot.size);
 
-    const id_wisatawan =
-    document.getElementById(
-    "id_wisatawan").value.trim();
+status.innerHTML =
+"Jumlah menu ditemukan: " + snapshot.size;
 
-    const nama_wisatawan =
-    document.getElementById(
-    "nama_wisatawan").value.trim();
+if(snapshot.empty){
+menuList.innerHTML =
+"<p>Tidak ada menu ditemukan.</p>";
+return;
+}
 
-    const tempat_lahir =
-    document.getElementById(
-    "tempat_lahir").value.trim();
+snapshot.forEach((doc)=>{
 
-    try{
+const data = doc.data();
 
-        await setDoc(
+console.log(doc.id,data);
 
-            doc(
-                db,
-                "wisatawan",
-                id_wisatawan
-            ),
-
-            {
-                id_wisatawan,
-                nama_wisatawan,
-                tempat_lahir,
-                created_at:
-                new Date()
-                .toISOString()
-            }
-
-        );
-
-        pesan.style.color =
-        "#00ff66";
-
-        pesan.innerHTML =
-        "✅ Data berhasil disimpan";
-
-        form.reset();
-
-    }
-
-    catch(error){
-
-        pesan.style.color =
-        "#ff4444";
-
-        pesan.innerHTML =
-        "❌ " + error.message;
-
-    }
+menuList.innerHTML += `
+<div class="card">
+<h3>${data.name}</h3>
+<p>Harga : Rp ${data.price}</p>
+<p>Kategori : ${data.category}</p>
+<p>Tersedia : ${data.available}</p>
+</div>
+`;
 
 });
 
-onSnapshot(
+} catch(error){
 
-    collection(db,"wisatawan"),
+console.error(error);
 
-    (snapshot)=>{
+status.innerHTML =
+"ERROR : " + error.message;
 
-        dataBody.innerHTML="";
+}
 
-        snapshot.forEach((doc)=>{
+}
 
-            const data =
-            doc.data();
+loadMenu();
 
-            dataBody.innerHTML += `
+document
+.getElementById("orderForm")
+.addEventListener(
+"submit",
+async(e)=>{
 
-            <tr>
-                <td>${data.id_wisatawan}</td>
-                <td>${data.nama_wisatawan}</td>
-                <td>${data.tempat_lahir}</td>
-            </tr>
+e.preventDefault();
 
-            `;
+try{
 
-        });
+await addDoc(
+collection(db,"orders"),
+{
+customerId:
+document.getElementById("customerId").value,
 
-    }
+restaurantId:
+"resto1",
 
+tableNumber:
+parseInt(
+document.getElementById("tableNumber").value
+),
+
+status:"pending",
+
+totalPrice:50000,
+
+createdAt:
+Timestamp.now()
+}
 );
+
+alert("Pesanan berhasil disimpan");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
 
 </script>
 
 </body>
 </html>
-
